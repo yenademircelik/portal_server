@@ -1,0 +1,76 @@
+import { Table, Model, Column, DataType } from 'sequelize-typescript';
+
+@Table
+export class Work extends Model<Work> {
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  order_number: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  project_number: string;
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  vendor_id: number;
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  customer_id: number;
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  quality_responsible_id: number;
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  inspector_id: number;
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  foreman_id: number;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  work_type: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  state: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  status: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  creator_name: string;
+
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+  })
+  order_id: number;
+}
