@@ -3,6 +3,7 @@ import { SEQUELIZE, DEVELOPMENT, TEST, PRODUCTION } from '../constants';
 import { databaseConfig } from './database.config';
 import { User } from 'src/modules/users/user.entity';
 import { Work } from 'src/modules/works/works.entity';
+import { InspectionPlan } from 'src/modules/inspectionplan/inspectionplan.entity';
 
 export const databaseProviders = [
   {
@@ -23,7 +24,7 @@ export const databaseProviders = [
           config = databaseConfig.development;
       }
       const sequelize = new Sequelize(config);
-      sequelize.addModels([User, Work]);
+      sequelize.addModels([User, Work,InspectionPlan]);
       await sequelize.sync();
       return sequelize;
     },
