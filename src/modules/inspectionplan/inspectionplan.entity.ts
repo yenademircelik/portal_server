@@ -4,7 +4,7 @@ import {  Column, DataType, Table, Model} from "sequelize-typescript";
 @Table
 export class InspectionPlan extends Model<InspectionPlan>{
     @Column({
-        type: DataType.NUMBER,
+        type: DataType.INTEGER,
         unique:true,
         allowNull:false,
     })
@@ -16,7 +16,7 @@ export class InspectionPlan extends Model<InspectionPlan>{
     })
     vendor_name:string;
     @Column({
-        type:DataType.NUMBER,
+        type:DataType.INTEGER,
         allowNull:false,
     })
     customer_odooid:number;
@@ -28,7 +28,7 @@ export class InspectionPlan extends Model<InspectionPlan>{
     customer_name:string;
     
     @Column({
-        type:DataType.NUMBER,
+        type:DataType.INTEGER,
         allowNull:false,
     })
     product_odooid:number;
@@ -40,7 +40,7 @@ export class InspectionPlan extends Model<InspectionPlan>{
     product_name:string;
     
     @Column({
-        type:DataType.NUMBER,
+        type:DataType.INTEGER,
         allowNull:false,
     })
     order_id:number;
@@ -52,7 +52,7 @@ export class InspectionPlan extends Model<InspectionPlan>{
     order_number:string;
     
     @Column({
-        type:DataType.NUMBER,
+        type:DataType.INTEGER,
         allowNull:false,
     })
     quantity:number;
