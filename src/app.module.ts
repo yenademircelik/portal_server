@@ -4,6 +4,8 @@ import { DatabaseModule } from './core/database/database.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { WorksModule } from './modules/works/works.module';
+import { InspectionPlan } from './modules/inspectionplan/inspectionplan.entity';
+import { InspectionPlanModule } from './modules/inspectionplan/inspectionplan.module';
 
 @Module({
   imports: [
@@ -12,6 +14,7 @@ import { WorksModule } from './modules/works/works.module';
     AuthModule,
     UsersModule,
     WorksModule,
+    InspectionPlanModule,
   ],
   controllers: [],
   providers: [],

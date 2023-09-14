@@ -15,9 +15,9 @@ import { error } from "console";
  async createInspectionPlan(inspectionPlan:InspectionPlanDto):Promise<InspectionPlan>{
     return await this.inspectionPlanRepository.create(inspectionPlan)
  }
- async getByStateAndStatus(state:string,status:string):Promise<InspectionPlan>{
-    return await this.inspectionPlanRepository.findOne<InspectionPlan>({where: 
-        Sequelize.or(
+ async getByStateAndStatus(state:string,status:string):Promise<InspectionPlan[]>{
+    return await this.inspectionPlanRepository.findAll<InspectionPlan>({where: 
+        Sequelize.and(
           { state},
           { status }
         )
@@ -28,8 +28,8 @@ import { error } from "console";
  async getAllInspectionPlan(): Promise <InspectionPlan[]>{
     return await this.inspectionPlanRepository.findAll<InspectionPlan>()
  }
- async getByState(state:string) : Promise <InspectionPlan> {
-    return await this.inspectionPlanRepository.findOne({where:{state}})
+ async getByState(state:string) : Promise <InspectionPlan[]> {
+    return await this.inspectionPlanRepository.findAll({where:{state}})
  }
 
  async delete(vendor_odooid:number):Promise<InspectionPlan>{
@@ -40,17 +40,18 @@ import { error } from "console";
         return Promise.reject(error)
     }
  }
- async update(vendor_odooid:number,fieldsToUpdate: Record<string,any>):Promise <InspectionPlan>{
-    const setClauses =Object.keys(fieldsToUpdate).map((fieldName)=>`${fieldName} = :${fieldName}`)
-    const updateValues={...fieldsToUpdate,vendor_odooid}
-    await this.inspectionPlanRepository.update(updateValues,{
-        where: {vendor_odooid},
-        returning:true,
-    });
+ async update(vendor_odooid: number, fieldsToUpdate: Record<string, any>): Promise<InspectionPlan[] | null> {
+   const updateResult = await this.inspectionPlanRepository.update(fieldsToUpdate, {
+       where: { vendor_odooid }
+   });
 
-    return this.inspectionPlanRepository.findByPk(vendor_odooid)
+   if (updateResult[0] === 0) { // Eğer hiçbir kayıt güncellenmediyse
+       return null;
+   }
 
-
-} 
+   return this.inspectionPlanRepository.findAll({
+       where: { vendor_odooid }
+   });
+}
 
 }

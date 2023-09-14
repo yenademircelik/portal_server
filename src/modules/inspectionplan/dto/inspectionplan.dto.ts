@@ -4,9 +4,9 @@ import { PrimaryKey } from "sequelize-typescript";
 
 
 export class InspectionPlanDto {
+ 
     @IsNotEmpty()
     @IsNumber()
-    @PrimaryKey
     readonly vendor_odooid:number
     @IsNotEmpty()
     @IsString()
@@ -36,10 +36,10 @@ export class InspectionPlanDto {
     @IsString()
     readonly control_responsible:string
     @IsNotEmpty()
-    @IsDate()
+    
     readonly control_date:Date
     @IsNotEmpty()
-    @IsDate()
+    
     readonly delivery_date:Date
     @IsNotEmpty()
     @IsString()

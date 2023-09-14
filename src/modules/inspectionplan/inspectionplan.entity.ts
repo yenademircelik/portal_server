@@ -2,7 +2,10 @@ import {  Column, DataType, Table, Model} from "sequelize-typescript";
 
 
 @Table
+
 export class InspectionPlan extends Model<InspectionPlan>{
+    
+
     @Column({
         type: DataType.INTEGER,
         unique:true,
