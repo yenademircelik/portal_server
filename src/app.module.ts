@@ -4,6 +4,7 @@ import { DatabaseModule } from './core/database/database.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { WorksModule } from './modules/works/works.module';
+import { WorkStepsModule } from './modules/work-steps/work-steps.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { WorksModule } from './modules/works/works.module';
     AuthModule,
     UsersModule,
     WorksModule,
+    WorkStepsModule,
   ],
   controllers: [],
   providers: [],

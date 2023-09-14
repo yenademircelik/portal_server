@@ -1,4 +1,5 @@
-import { Table, Model, Column, DataType } from 'sequelize-typescript';
+import { Table, Model, Column, DataType, HasMany } from 'sequelize-typescript';
+import { WorkSteps } from '../work-steps/work-steps.entity';
 
 @Table
 export class Work extends Model<Work> {
@@ -73,4 +74,7 @@ export class Work extends Model<Work> {
     allowNull: false,
   })
   order_id: number;
+
+  @HasMany(() => WorkSteps)
+  workStep: WorkSteps[];
 }
