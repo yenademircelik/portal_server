@@ -4,6 +4,7 @@ import { databaseConfig } from './database.config';
 import { User } from 'src/modules/users/user.entity';
 import { Work } from 'src/modules/works/works.entity';
 import { InspectionPlan } from 'src/modules/inspectionplan/inspectionplan.entity';
+import { Customer } from 'src/modules/customer/customer.entity';
 
 export const databaseProviders = [
   {
@@ -24,7 +25,7 @@ export const databaseProviders = [
           config = databaseConfig.development;
       }
       const sequelize = new Sequelize(config);
-      sequelize.addModels([User, Work,InspectionPlan]);
+      sequelize.addModels([User, Work,InspectionPlan,Customer]);
       await sequelize.sync();
       return sequelize;
     },

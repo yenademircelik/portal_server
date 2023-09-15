@@ -6,6 +6,7 @@ import { UsersModule } from './modules/users/users.module';
 import { WorksModule } from './modules/works/works.module';
 import { InspectionPlan } from './modules/inspectionplan/inspectionplan.entity';
 import { InspectionPlanModule } from './modules/inspectionplan/inspectionplan.module';
+import { CustomerModule } from './modules/customer/customer.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { InspectionPlanModule } from './modules/inspectionplan/inspectionplan.mo
     UsersModule,
     WorksModule,
     InspectionPlanModule,
+    CustomerModule,
   ],
   controllers: [],
   providers: [],

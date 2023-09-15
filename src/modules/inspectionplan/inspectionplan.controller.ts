@@ -52,7 +52,7 @@ export class InspectionPlanController{
         @Get('closed')
         async getCLosedInspectionPlans (@Param('closed') state:string){
             const inspectionPlan=await this.inspectionPlanService.getByState(state="Closed")
-            if (!state)
+            if (!inspectionPlan)
             {
                 throw new HttpException('Bad Request',HttpStatus.BAD_REQUEST)
             }
