@@ -7,6 +7,7 @@ import { WorksModule } from './modules/works/works.module';
 import { InspectionPlan } from './modules/inspectionplan/inspectionplan.entity';
 import { InspectionPlanModule } from './modules/inspectionplan/inspectionplan.module';
 import { CustomerModule } from './modules/customer/customer.module';
+import { VendorModule } from './modules/vendor/vendor.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { CustomerModule } from './modules/customer/customer.module';
     WorksModule,
     InspectionPlanModule,
     CustomerModule,
+    VendorModule,
   ],
   controllers: [],
   providers: [],
