@@ -5,6 +5,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { WorksModule } from './modules/works/works.module';
 import { WorkStepsModule } from './modules/work-steps/work-steps.module';
+import { WorkProductsModule } from './modules/work-products/work-products.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { WorkStepsModule } from './modules/work-steps/work-steps.module';
     UsersModule,
     WorksModule,
     WorkStepsModule,
+    WorkProductsModule,
   ],
   controllers: [],
   providers: [],
