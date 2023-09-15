@@ -11,6 +11,9 @@ export class UsersService {
   async createUser(user: UserDto): Promise<User> {
     return await this.userRepository.create(user);
   }
+  async findAllUsers():Promise<User[]>{
+    return await this.userRepository.findAll()
+  }
 
   async findOneByEmail(email: string): Promise<User> {
     return await this.userRepository.findOne({ where: { email } });
