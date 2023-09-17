@@ -8,6 +8,7 @@ import { InspectionPlan } from './modules/inspectionplan/inspectionplan.entity';
 import { InspectionPlanModule } from './modules/inspectionplan/inspectionplan.module';
 import { CustomerModule } from './modules/customer/customer.module';
 import { VendorModule } from './modules/vendor/vendor.module';
+import { LocationModule } from './modules/location/location.module';
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { VendorModule } from './modules/vendor/vendor.module';
     InspectionPlanModule,
     CustomerModule,
     VendorModule,
+    LocationModule,
   ],
   controllers: [],
   providers: [],
