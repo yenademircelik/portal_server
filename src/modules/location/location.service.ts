@@ -22,28 +22,20 @@ export class LocationService {
         return await this.locationRepository.findAll()
     }
     //TODO: SQL İlişkisi eklenecek.
-    async findLatestByNames(): Promise<Location[]> {
-        return await this.locationRepository.findAll({
-            attributes: ['name', 'latitude', 'longitude', 'timestamp'],
-            include: [
-                {
-                    model: Location,
-                    as: 'subq',
-                    attributes: [
-                        [fn('MAX', col('timestamp')), 'maxTimeStamp']
-                    ],
-                    where: {
-                        name: col('location.name')
-                    },
-                    duplicating: false,
-                    required: true
-                }
+    async findLatestByNames() {
+        const results = await this.locationRepository.findAll({
+            attributes: [
+                'name',
+                'atitude', // atitude sütunu burada dahil edildi
+                [Sequelize.fn('MAX', Sequelize.col('longitude')), 'latestLongitude'],
+                [Sequelize.fn('MAX', Sequelize.col('timestamp')), 'latestTimeStamp'],
             ],
-            where: {
-                timestamp: col('subq.maxTimeStamp')
-            },
-            group: ['name']
+            group: ['name', 'atitude'], // atitude sütunu gruplama işlemine dahil edildi
+            raw: true,
         });
+    
+        console.log(results);
+        return results;
     }
 }
 
