@@ -10,6 +10,9 @@ import { CustomerModule } from './modules/customer/customer.module';
 import { VendorModule } from './modules/vendor/vendor.module';
 import { LocationModule } from './modules/location/location.module';
 import { DescriptionControlModule } from './modules/description_control/description_control.module';
+import { WorkStepsModule } from './modules/work-steps/work-steps.module';
+import { WorkProductsModule } from './modules/work-products/work-products.module';
+import { ProductsModule } from './modules/products/products.module';
 
 @Module({
   imports: [
@@ -23,7 +26,11 @@ import { DescriptionControlModule } from './modules/description_control/descript
     VendorModule,
     LocationModule,
     DescriptionControlModule,
+    WorkStepsModule,
+    WorkProductsModule,
+    ProductsModule,
   ],
+  
   controllers: [],
   providers: [],
 })

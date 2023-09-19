@@ -8,6 +8,9 @@ import { Customer } from 'src/modules/customer/customer.entity';
 import { Vendor } from 'src/modules/vendor/vendor.entity';
 import { Location } from 'src/modules/location/location.entity';
 import { DescriptionControl } from 'src/modules/description_control/description_control.entity';
+import { WorkSteps } from 'src/modules/work-steps/work-steps.entity';
+import { WorkProducts } from 'src/modules/work-products/work-products.entity';
+import { Products } from 'src/modules/products/products.entity';
 
 export const databaseProviders = [
   {
@@ -28,7 +31,9 @@ export const databaseProviders = [
           config = databaseConfig.development;
       }
       const sequelize = new Sequelize(config);
-      sequelize.addModels([User, Work,InspectionPlan,Customer,Vendor,Location,DescriptionControl]);
+      
+      sequelize.addModels([User, Work,InspectionPlan,Customer,Vendor,Location,DescriptionControl,WorkSteps, WorkProducts, Products]);
+
       await sequelize.sync();
       return sequelize;
     },

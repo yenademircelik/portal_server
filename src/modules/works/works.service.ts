@@ -18,10 +18,6 @@ export class WorksService {
     return await this.workRepository.create(work);
   }
 
-  async getWorkById(id: number): Promise<Work> {
-    return await this.workRepository.findOne({ where: { id } });
-  }
-
   async deleteWork(id: number): Promise<Work> {
     const deletedWork = await this.workRepository.destroy({ where: { id } });
 
