@@ -6,6 +6,7 @@ import { UsersModule } from './modules/users/users.module';
 import { WorksModule } from './modules/works/works.module';
 import { WorkStepsModule } from './modules/work-steps/work-steps.module';
 import { WorkProductsModule } from './modules/work-products/work-products.module';
+import { ProductsModule } from './modules/products/products.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { WorkProductsModule } from './modules/work-products/work-products.module
     WorksModule,
     WorkStepsModule,
     WorkProductsModule,
+    ProductsModule,
   ],
   controllers: [],
   providers: [],
