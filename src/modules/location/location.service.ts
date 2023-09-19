@@ -21,7 +21,6 @@ export class LocationService {
     async getAllLocations(): Promise<Location[]> {
         return await this.locationRepository.findAll()
     }
-    //TODO: SQL İlişkisi eklenecek.
     async findLatestByNames() {
         const results = await this.locationRepository.findAll({
             attributes: [

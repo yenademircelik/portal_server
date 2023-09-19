@@ -5,12 +5,12 @@ import { InspectionPlan } from "./inspectionplan.entity";
 import { InspectionPlanService } from "./inspectionplan.service";
 import { InspectionPlanDto } from "./dto/inspectionplan.dto";
 import { error } from "console";
+@UseGuards(JwtGuard)
 
 @Controller('inspectionplans')
 
 export class InspectionPlanController{
     constructor(private readonly inspectionPlanService:InspectionPlanService){}
-        @UseGuards(JwtGuard)
         @Get()
         async getInspectionPlans(){
             const inspectionPlans = await this.inspectionPlanService.getAllInspectionPlan();

@@ -9,6 +9,7 @@ import { InspectionPlanModule } from './modules/inspectionplan/inspectionplan.mo
 import { CustomerModule } from './modules/customer/customer.module';
 import { VendorModule } from './modules/vendor/vendor.module';
 import { LocationModule } from './modules/location/location.module';
+import { DescriptionControlModule } from './modules/description_control/description_control.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { LocationModule } from './modules/location/location.module';
     CustomerModule,
     VendorModule,
     LocationModule,
+    DescriptionControlModule,
   ],
   controllers: [],
   providers: [],
