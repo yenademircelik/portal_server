@@ -12,6 +12,7 @@ import { WorkSteps } from 'src/modules/work-steps/work-steps.entity';
 import { WorkProducts } from 'src/modules/work-products/work-products.entity';
 import { Products } from 'src/modules/products/products.entity';
 import { QaulityControl } from 'src/modules/quality-control/quality-control.entity';
+import { Images } from 'src/modules/images/images.entity';
 
 export const databaseProviders = [
   {
@@ -45,6 +46,7 @@ export const databaseProviders = [
         WorkProducts,
         Products,
         QaulityControl,
+        Images,
       ]);
 
       await sequelize.sync();
