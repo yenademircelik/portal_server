@@ -4,13 +4,12 @@ import { JwtGuard } from "../auth/guard/jwt.guard";
 import { LocationDto } from "./dto/location.dto";
 import { Location } from "./location.entity";
 
-
+@UseGuards(JwtGuard)
 @Controller('api/locations')
 
 export class LocationController {
     constructor (private readonly locationService:LocationService){}
 
-    @UseGuards(JwtGuard)
     @Get()
     async getAllLocation () {
         const locations = await this.locationService.getAllLocations()
@@ -24,7 +23,6 @@ export class LocationController {
         }
     }
     
-    @UseGuards(JwtGuard)
     @Post()
     async createLocations (@Body() location:LocationDto): Promise<Location>{
         const locations=await this.locationService.createLocation(location)
@@ -36,7 +34,6 @@ export class LocationController {
         }
     }
 
-    @UseGuards(JwtGuard)
     @Get('latest')
     async getLatestLocation(){
         const location= await this.locationService.findLatestByNames()

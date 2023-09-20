@@ -5,20 +5,19 @@ import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 @Controller('api/description_controls')
 
-export class DescriptionControlDto {
+export class CertificateDto {
 
     @IsNumber()
     @IsNotEmpty()
-    readonly inspectionplan_id:number
+    readonly work_id:number
     @IsString()
-    @IsNotEmpty()
-    readonly description:string
-    @IsNotEmpty()
-    documents:any
+    certificate_url:any
+  
     @IsNumber()
     @IsNotEmpty()
-    readonly creator_id:number
+    readonly product_id:number
+    @IsNumber()
     @IsNotEmpty()
-    readonly creation_date:Date
+    readonly step_id:number
 
 }

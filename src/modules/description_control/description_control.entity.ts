@@ -6,35 +6,33 @@ import { Col } from "sequelize/types/utils";
 @Table
 
 export class DescriptionControl extends Model<DescriptionControl>{
-    @ForeignKey(() => InspectionPlan)
+   
     @Column(
         {
-            type:DataType.NUMBER,
+            type:DataType.INTEGER,
             allowNull:false,
         }
     )
     inspectionplan_id:number
-    @BelongsTo(() => InspectionPlan)
-    inspectionPlan: InspectionPlan;
 
     @Column
     ({
-        type:DataType.STRING
-        
+        type:DataType.STRING 
     })
     description:string
+
     @Column
     ({
-        type:DataType.STRING
-        
+        type:DataType.STRING 
     })
     documents:string
+
     @Column
     ({
-        type:DataType.NUMBER
-        
+        type:DataType.INTEGER 
     })
     creator_id:number
+
     @Column({
         type:DataType.DATE,
         allowNull:false,

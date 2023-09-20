@@ -13,6 +13,7 @@ import { DescriptionControlModule } from './modules/description_control/descript
 import { WorkStepsModule } from './modules/work-steps/work-steps.module';
 import { WorkProductsModule } from './modules/work-products/work-products.module';
 import { ProductsModule } from './modules/products/products.module';
+import { CertificateModule } from './modules/certificate/certificate.module';
 
 @Module({
   imports: [
@@ -29,6 +30,7 @@ import { ProductsModule } from './modules/products/products.module';
     WorkStepsModule,
     WorkProductsModule,
     ProductsModule,
+    CertificateModule,
   ],
   
   controllers: [],
