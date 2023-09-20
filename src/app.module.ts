@@ -4,7 +4,6 @@ import { DatabaseModule } from './core/database/database.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
 import { WorksModule } from './modules/works/works.module';
-import { InspectionPlan } from './modules/inspectionplan/inspectionplan.entity';
 import { InspectionPlanModule } from './modules/inspectionplan/inspectionplan.module';
 import { CustomerModule } from './modules/customer/customer.module';
 import { VendorModule } from './modules/vendor/vendor.module';
@@ -13,6 +12,7 @@ import { DescriptionControlModule } from './modules/description_control/descript
 import { WorkStepsModule } from './modules/work-steps/work-steps.module';
 import { WorkProductsModule } from './modules/work-products/work-products.module';
 import { ProductsModule } from './modules/products/products.module';
+import { QualityControlModule } from './modules/quality-control/quality-control.module';
 
 @Module({
   imports: [
@@ -29,8 +29,9 @@ import { ProductsModule } from './modules/products/products.module';
     WorkStepsModule,
     WorkProductsModule,
     ProductsModule,
+    QualityControlModule,
   ],
-  
+
   controllers: [],
   providers: [],
 })

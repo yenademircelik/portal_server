@@ -11,6 +11,7 @@ import { DescriptionControl } from 'src/modules/description_control/description_
 import { WorkSteps } from 'src/modules/work-steps/work-steps.entity';
 import { WorkProducts } from 'src/modules/work-products/work-products.entity';
 import { Products } from 'src/modules/products/products.entity';
+import { QaulityControl } from 'src/modules/quality-control/quality-control.entity';
 
 export const databaseProviders = [
   {
@@ -31,8 +32,20 @@ export const databaseProviders = [
           config = databaseConfig.development;
       }
       const sequelize = new Sequelize(config);
-      
-      sequelize.addModels([User, Work,InspectionPlan,Customer,Vendor,Location,DescriptionControl,WorkSteps, WorkProducts, Products]);
+
+      sequelize.addModels([
+        User,
+        Work,
+        InspectionPlan,
+        Customer,
+        Vendor,
+        Location,
+        DescriptionControl,
+        WorkSteps,
+        WorkProducts,
+        Products,
+        QaulityControl,
+      ]);
 
       await sequelize.sync();
       return sequelize;
