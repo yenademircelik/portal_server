@@ -20,7 +20,7 @@ export class Certificate extends Model<Certificate>{
             allowNull:false,
         }
     )
-    certificate_url:string
+    certificates:string
     @Column(
         {
             type:DataType.INTEGER,

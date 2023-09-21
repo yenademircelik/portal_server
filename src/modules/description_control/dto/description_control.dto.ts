@@ -1,9 +1,4 @@
-import { Controller } from "@nestjs/common";
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
-
-
-
-@Controller('api/description_controls')
+import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
 export class DescriptionControlDto {
 

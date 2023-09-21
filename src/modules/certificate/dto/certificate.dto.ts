@@ -11,7 +11,7 @@ export class CertificateDto {
     @IsNotEmpty()
     readonly work_id:number
     @IsString()
-    certificate_url:any
+    certificates:any
   
     @IsNumber()
     @IsNotEmpty()

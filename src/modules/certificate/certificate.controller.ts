@@ -9,7 +9,7 @@ import { CertificateService } from './certificate.service';
 
 
 @UseGuards(JwtGuard)
-@Controller('api/description_controls')
+@Controller('api/certificate')
 
 export class CertificateController{
     constructor(private readonly certificateService:CertificateService){
@@ -25,10 +25,10 @@ export class CertificateController{
 
         }
     }
-    @Get(':inspectionplan_id')
-    async getCertificate(@Param('inspection_id') inspection_id:number) {
+    @Get(':id')
+    async getCertificate(@Param('id') id:number) {
         try {
-            const inspectionId=await this.certificateService.findByIdCertificate(inspection_id)
+            const inspectionId=await this.certificateService.findByIdCertificate(id)
             return inspectionId
         } catch (error) {
             throw new HttpException('Bad request at getDescriptionById',HttpStatus.BAD_REQUEST)
@@ -55,7 +55,7 @@ export class CertificateController{
     @Post()
     @UseInterceptors(
     FileFieldsInterceptor([
-      { name: 'documents', maxCount: 1 },
+      { name: 'certificates', maxCount: 1 },
     ]),
   )
     async createCertificate(
@@ -87,7 +87,7 @@ export class CertificateController{
     
           const certificateDto: CertificateDto = {
             work_id:work_id,
-            certificate_url:certificate,
+            certificates:certificate_url,
             product_id:product_id,
             step_id:step_id
             
