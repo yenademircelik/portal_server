@@ -7,6 +7,7 @@ import {
   Table,
 } from 'sequelize-typescript';
 import { Work } from '../works/works.entity';
+import { Products } from '../products/products.entity';
 
 @Table
 export class WorkProducts extends Model<WorkProducts> {
@@ -19,11 +20,14 @@ export class WorkProducts extends Model<WorkProducts> {
   @BelongsTo(() => Work)
   work: Work;
 
+  @ForeignKey(() => Products)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
   product_id: number;
+  @BelongsTo(() => Products)
+  product: Products;
 
   @Column({
     type: DataType.STRING,

@@ -27,6 +27,10 @@ export class WorkStepsService {
       where: { status },
     });
 
+    if (workStep.length === 0) {
+      throw new NotFoundException('Workstep is not found !');
+    }
+
     return workStep;
   }
 

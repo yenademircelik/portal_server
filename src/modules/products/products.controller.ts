@@ -27,48 +27,6 @@ import { Request, Response } from 'express';
 export class ProductsController {
   constructor(private readonly productService: ProductsService) {}
 
-  // @Post()
-  // @UseInterceptors(
-  //   FileFieldsInterceptor([
-  //     { name: 'technicaldrawingurl', maxCount: 1 },
-  //     { name: 'guideurl', maxCount: 1 },
-  //   ]),
-  // )
-  // async createProduct(
-  //   @UploadedFiles()
-  //   files: {
-  //     technicaldrawingurl?: Express.Multer.File[];
-  //     guideurl?: Express.Multer.File[];
-  //   },
-  //   @Body() productDto: ProductDto,
-  //   @Res() res: Response,
-  // ) {
-  //   try {
-  //     const technical_drawing = files.technicaldrawingurl
-  //       ? files.technicaldrawingurl[0]
-  //       : null;
-  //     const guide = files.guideurl ? files.guideurl[0] : null;
-
-  //     productDto.technicalDrawingUrl = technical_drawing
-  //       ? await uploadFile(
-  //           technical_drawing.buffer,
-  //           technical_drawing.originalname,
-  //         )
-  //       : null;
-  //     productDto.guideUrl = guide
-  //       ? await uploadFile(guide.buffer, guide.originalname)
-  //       : null;
-
-  //     const result = await this.productService.createProduct(productDto);
-  //     return res
-  //       .status(HttpStatus.CREATED)
-  //       .json({ message: 'Successfully Created', product: result });
-  //   } catch (err) {
-  //     console.error(err);
-  //     throw new InternalServerErrorException('Something went wrong !');
-  //   }
-  // }
-
   @Get()
   async getProducts() {
     const products = await this.productService.getProducts();
@@ -155,7 +113,7 @@ export class ProductsController {
         .json({ message: 'Successfully Created', product: result });
     } catch (err) {
       console.error(err);
-      throw new InternalServerErrorException('Something went wrong !');
+      throw new InternalServerErrorException(err);
     }
   }
 }

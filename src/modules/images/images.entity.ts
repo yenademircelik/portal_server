@@ -1,4 +1,12 @@
-import { Column, DataType, Model, Table } from 'sequelize-typescript';
+import {
+  BelongsTo,
+  Column,
+  DataType,
+  ForeignKey,
+  Model,
+  Table,
+} from 'sequelize-typescript';
+import { QaulityControl } from '../quality-control/quality-control.entity';
 
 @Table
 export class Images extends Model<Images> {
@@ -8,11 +16,14 @@ export class Images extends Model<Images> {
   })
   image_url: string;
 
+  @ForeignKey(() => QaulityControl)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
   })
   quality_control_id: number;
+  @BelongsTo(() => QaulityControl)
+  qualityControl: QaulityControl;
 
   @Column({
     type: DataType.STRING,
