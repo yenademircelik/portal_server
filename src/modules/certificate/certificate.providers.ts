@@ -1,10 +1,9 @@
-import { Certificate } from "crypto";
-import { CERTIFICATE_REPOSITORY } from "src/core/constants";
+import { Certificate } from 'crypto';
+import { CERTIFICATE_REPOSITORY } from '../../core/constants';
 
-
-export const CertificateProviders =[
-    {
-        provide:CERTIFICATE_REPOSITORY,
-        useValue:Certificate,
-    }
+export const CertificateProviders = [
+  {
+    provide: CERTIFICATE_REPOSITORY,
+    useValue: Certificate,
+  },
 ];

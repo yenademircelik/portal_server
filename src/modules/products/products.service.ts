@@ -1,5 +1,5 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { PRODUCTS_REPOSITORY } from 'src/core/constants';
+import { PRODUCTS_REPOSITORY } from '../../core/constants';
 import { Products } from './products.entity';
 import { ProductDto } from './dto/product.dto';
 

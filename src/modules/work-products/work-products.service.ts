@@ -1,5 +1,5 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { WORKPRODUCTS_REPOSITORY } from 'src/core/constants';
+import { WORKPRODUCTS_REPOSITORY } from '../../core/constants';
 import { WorkProducts } from './work-products.entity';
 import { WorkProductDto } from './dto/work-products.dto';
 

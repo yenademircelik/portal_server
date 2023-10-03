@@ -1,4 +1,4 @@
-import { WORK_REPOSITORY } from 'src/core/constants';
+import { WORK_REPOSITORY } from '../../core/constants';
 import { Work } from './works.entity';
 
 export const worksProvider = [

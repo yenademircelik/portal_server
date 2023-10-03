@@ -1,9 +1,9 @@
-import { INSPECTIONPLAN_REPOSITORY } from "src/core/constants";
-import { InspectionPlan } from "./inspectionplan.entity";
+import { INSPECTIONPLAN_REPOSITORY } from '../../core/constants';
+import { InspectionPlan } from './inspectionplan.entity';
 
-export const inspectionPlanProviders=[
-    {
-        provide:INSPECTIONPLAN_REPOSITORY,
-        useValue:InspectionPlan,
-    }
-]
+export const inspectionPlanProviders = [
+  {
+    provide: INSPECTIONPLAN_REPOSITORY,
+    useValue: InspectionPlan,
+  },
+];

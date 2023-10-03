@@ -1,10 +1,9 @@
-import { VENDOR_REPOSITORY } from "src/core/constants";
-import { Vendor } from "./vendor.entity";
+import { VENDOR_REPOSITORY } from '../../core/constants';
+import { Vendor } from './vendor.entity';
 
-
-export const vendorProviders=[
-    {
-        provide:VENDOR_REPOSITORY,
-        useValue:Vendor,
-    }
-]
+export const vendorProviders = [
+  {
+    provide: VENDOR_REPOSITORY,
+    useValue: Vendor,
+  },
+];

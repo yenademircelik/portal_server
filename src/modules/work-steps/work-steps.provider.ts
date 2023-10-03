@@ -1,4 +1,4 @@
-import { WORKSTEPS_REPOSITORY } from 'src/core/constants';
+import { WORKSTEPS_REPOSITORY } from '../../core/constants';
 import { WorkSteps } from './work-steps.entity';
 
 export const workStepsProvider = [

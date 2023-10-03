@@ -1,5 +1,5 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { QUALITY_CONTROL_REPOSITORY } from 'src/core/constants';
+import { QUALITY_CONTROL_REPOSITORY } from '../../core/constants';
 import { QaulityControl } from './quality-control.entity';
 import { QaulityControlDto } from './dto/quality-control.dto';
 

@@ -4,7 +4,7 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import { IMAGES_REPOSITORY } from 'src/core/constants';
+import { IMAGES_REPOSITORY } from '../../core/constants';
 import { Images } from './images.entity';
 import { ImageDto } from './dto/image.dto';
 
