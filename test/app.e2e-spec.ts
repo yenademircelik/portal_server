@@ -7,6 +7,8 @@ import { ProductDto } from 'src/modules/products/dto/product.dto';
 import { ImageDto } from 'src/modules/images/dto/image.dto';
 import { QaulityControlDto } from 'src/modules/quality-control/dto/quality-control.dto';
 import FormData from 'form-data';
+import { AuthDto } from 'src/modules/auth/dto/auth.dto';
+import { UserDto } from 'src/modules/users/dto/user.dto';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -30,14 +32,20 @@ describe('AppController (e2e)', () => {
   describe('products', () => {
     describe('getProducts', () => {
       it('test get products', () => {
-        return pactum.spec().get('/products').inspect();
+        return pactum
+          .spec()
+          .get('/products')
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .inspect();
       });
     });
     describe('getProductsByName', () => {
       it('test get products by name', () => {
         return pactum
           .spec()
-          .get('/products/:productName')
+          .get('/products/productName')
           .withHeaders({
             Authorization: 'Bearer $S{userAt}',
           })
@@ -48,8 +56,11 @@ describe('AppController (e2e)', () => {
       it('test get products by odooid', () => {
         return pactum
           .spec()
-          .get('http://localhost:3000/products/:odooId')
-          .withQueryParams('odooId', 1);
+          .get('/products/{odooId}')
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .withPathParams('odooId', 1);
       });
     });
     describe('postProducts', () => {
@@ -66,6 +77,9 @@ describe('AppController (e2e)', () => {
           .spec()
           .post('/products')
           .withMultiPartFormData(dto)
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
           .inspect();
       });
     });
@@ -76,8 +90,11 @@ describe('AppController (e2e)', () => {
       it('testing get images', () => {
         return pactum
           .spec()
-          .get('http://localhost:3000/images/:qualityControlId')
-          .withQueryParams('qualityControlId', 1)
+          .get('/images/{qualityControlId}')
+          .withPathParams('qualityControlId', 1)
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
           .inspect();
       });
     });
@@ -89,7 +106,14 @@ describe('AppController (e2e)', () => {
           status: 'deneme',
           work_id: 1,
         };
-        return pactum.spec().post('/images').withBody(dto).inspect();
+        return pactum
+          .spec()
+          .post('/images')
+          .withBody(dto)
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .inspect();
       });
     });
     describe('putImage', () => {
@@ -103,46 +127,62 @@ describe('AppController (e2e)', () => {
         };
         return pactum
           .spec()
-          .put('http://localhost:3000/images/:id')
-          .withQueryParams('id', 1)
+          .put('/images/{id}')
+          .withPathParams('id', 1)
           .withBody(dto)
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
           .inspect();
       });
     });
   });
   describe('qualityControl', () => {
-    it('testing post qualityControl', () => {
-      const dto: QaulityControlDto = {
-        form_id: 1,
-        step_name: 'deneme',
-        name: 'deneme',
-        technical_drawing_numbering: 'deneme',
-        tools: 'deneme',
-        description: 'deneme',
-        actual_dimension: 'deneme',
-        lower_tolerance: 'deneme',
-        upper_tolerance: 'deneme',
-        example_visual_url: 'deneme',
-        status: 'deneme',
-        type: 'deneme',
-        image_id: 1,
-        substep_id: 1,
-        measured_value_1: 1,
-        measured_value_2: 2,
-        measured_value_3: 3,
-        work_id: 1,
-        sample_quantity: 1,
-        row_number: 'deneme',
-      };
-      return pactum.spec().post('/qualityControl').withBody(dto).inspect();
+    describe('postQualityControl', () => {
+      it('testing post qualityControl', () => {
+        const dto: QaulityControlDto = {
+          form_id: 1,
+          step_name: 'deneme',
+          name: 'deneme',
+          technical_drawing_numbering: 'deneme',
+          tools: 'deneme',
+          description: 'deneme',
+          actual_dimension: 'deneme',
+          lower_tolerance: 'deneme',
+          upper_tolerance: 'deneme',
+          example_visual_url: 'deneme',
+          status: 'deneme',
+          type: 'deneme',
+          image_id: 1,
+          substep_id: 1,
+          measured_value_1: 1,
+          measured_value_2: 2,
+          measured_value_3: 3,
+          work_id: 1,
+          sample_quantity: 1,
+          row_number: 'deneme',
+        };
+        return pactum
+          .spec()
+          .post('/qualityControl')
+          .withBody(dto)
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .inspect();
+      });
     });
+
     describe('getQualityControl', () => {
       it('testing get quality control', () => {
         return pactum
           .spec()
-          .get('http://localhost:3000/form/:formId/:workId')
-          .withQueryParams('formId', 1)
-          .withQueryParams('workId', 1)
+          .get('/form/{formId}/{workId}')
+          .withPathParams('formId', 1)
+          .withPathParams('workId', 1)
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
           .inspect();
       });
     });
@@ -172,9 +212,42 @@ describe('AppController (e2e)', () => {
         };
         return pactum
           .spec()
-          .put('http://localhost:3000/qualityControl/:id')
-          .withQueryParams('id', 1)
+          .put('/qualityControl/{id}')
+          .withPathParams('id', 1)
           .withBody(dto)
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .inspect();
+      });
+    });
+  });
+  describe('Auth', () => {
+    describe('register', () => {
+      it('testing auth register', () => {
+        const dto: UserDto = {
+          name: 'burak',
+          phone: '654654',
+          email: 'bba@gmail.com',
+          password: '1',
+          company: 'yena',
+          related_company: 'deneme',
+          role: 'INTERNAL',
+        };
+        return pactum.spec().post('/auth/register').withBody(dto).inspect();
+      });
+    });
+    describe('login', () => {
+      it('testing auth login', () => {
+        const dto: AuthDto = {
+          email: 'bba@gmail.com',
+          password: '1',
+        };
+        return pactum
+          .spec()
+          .post('/auth/login')
+          .withBody(dto)
+          .stores('userAt', 'access_token')
           .inspect();
       });
     });
