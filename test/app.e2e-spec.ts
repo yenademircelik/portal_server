@@ -10,6 +10,7 @@ import FormData from 'form-data';
 import { AuthDto } from 'src/modules/auth/dto/auth.dto';
 import { UserDto } from 'src/modules/users/dto/user.dto';
 import { CustomerDto } from 'src/modules/customer/dto/customer.dto';
+import { VendorDto } from 'src/modules/vendor/dto/vendor.dto';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -332,6 +333,45 @@ describe('AppController (e2e)', () => {
           .withHeaders({
             Authorization: 'Bearer $S{userAt}',
           })
+          .inspect();
+      });
+    });
+  });
+  describe('Vendors', () => {
+    describe('CreateVendors', () => {
+      it('create vendors testing', () => {
+        const dto: VendorDto = {
+          name: 'testVendor',
+          odooid: 1,
+        };
+        return pactum
+          .spec()
+          .post('/api/vendors')
+          .withBody(dto)
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .inspect();
+      });
+    });
+    describe('getVendors', () => {
+      it('get vendors testing', () => {
+        return pactum
+          .spec()
+          .get('/api/vendors')
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .inspect();
+      });
+    });
+    describe('getVendors by name', () => {
+      it('get vendors by name testing', () => {
+        return pactum
+          .spec()
+          .get('/api/vendors/search')
+          .withQueryParams('name', 'testVendor')
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
           .inspect();
       });
     });

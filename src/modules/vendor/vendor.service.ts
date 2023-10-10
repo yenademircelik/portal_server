@@ -21,9 +21,7 @@ export class VendorService {
   async getVendorsByName(name: string): Promise<Vendor[]> {
     return await this.vendorRepository.findAll({
       where: {
-        name: {
-          [Op.like]: `%${name}%`,
-        },
+        name,
       },
     });
   }
