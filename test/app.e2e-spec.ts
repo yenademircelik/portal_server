@@ -1,16 +1,18 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
-import * as request from 'supertest';
 import { AppModule } from './../src/app.module';
 import * as pactum from 'pactum';
 import { ProductDto } from 'src/modules/products/dto/product.dto';
 import { ImageDto } from 'src/modules/images/dto/image.dto';
 import { QaulityControlDto } from 'src/modules/quality-control/dto/quality-control.dto';
-import FormData from 'form-data';
 import { AuthDto } from 'src/modules/auth/dto/auth.dto';
 import { UserDto } from 'src/modules/users/dto/user.dto';
 import { CustomerDto } from 'src/modules/customer/dto/customer.dto';
 import { VendorDto } from 'src/modules/vendor/dto/vendor.dto';
+import { WorkDto } from 'src/modules/works/dto/work.dto';
+import { WorkStepsDto } from 'src/modules/work-steps/dto/work-steps.dto';
+import { WorkProductDto } from 'src/modules/work-products/dto/work-products.dto';
+import { LocationDto } from 'src/modules/location/dto/location.dto';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -29,6 +31,10 @@ describe('AppController (e2e)', () => {
     await app.init();
     await app.listen(3000);
     pactum.request.setBaseUrl('http://localhost:3000');
+  });
+
+  afterAll(async () => {
+    await app.close();
   });
 
   describe('products', () => {
@@ -371,6 +377,214 @@ describe('AppController (e2e)', () => {
           .spec()
           .get('/api/vendors/search')
           .withQueryParams('name', 'testVendor')
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+  });
+  describe('Works', () => {
+    describe('getAllWorks', () => {
+      it('getAllWorks testing', () => {
+        return pactum
+          .spec()
+          .get('/works/all')
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+    describe('Post Work', () => {
+      it('create work testing', () => {
+        const dto: WorkDto = {
+          order_number: '1',
+          project_number: '2',
+          vendor_id: 3,
+          customer_id: 4,
+          quality_responsible_id: 5,
+          inspector_id: 6,
+          foreman_id: 7,
+          order_id: 8,
+          work_type: 'testOrder',
+          state: 'test',
+          status: 'test',
+          creator_name: 'bba',
+        };
+        return pactum
+          .spec()
+          .post('/works')
+          .withBody(dto)
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+    describe('getWorksById', () => {
+      it('get works by id testing', () => {
+        return pactum
+          .spec()
+          .get('/works/{id}')
+          .withPathParams('id', 1)
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+    describe('PutWorksById', () => {
+      it('update works by id testing', () => {
+        const updatedDto: WorkDto = {
+          order_number: '8',
+          project_number: '7',
+          vendor_id: 6,
+          customer_id: 5,
+          quality_responsible_id: 4,
+          inspector_id: 3,
+          foreman_id: 2,
+          order_id: 1,
+          work_type: 'updatedTestOrder',
+          state: 'updatedTest',
+          status: 'updatedTest',
+          creator_name: 'bba',
+        };
+        return pactum
+          .spec()
+          .put('/works/{id}')
+          .withPathParams('id', 1)
+          .withBody(updatedDto)
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+    describe('deleteWorkById', () => {
+      it('delete work by id testing', () => {
+        return pactum
+          .spec()
+          .delete('/works/{id}')
+          .withPathParams('id', 3)
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+  });
+  describe('workSteps', () => {
+    describe('CreateWorkSteps', () => {
+      it('create work steps testing', () => {
+        const dto: WorkStepsDto = {
+          work_id: 1,
+          step_name: 'deneme2',
+          state: 'deneme2',
+          status: 'deneme2',
+        };
+        return pactum
+          .spec()
+          .post('/workSteps')
+          .withBody(dto)
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+    describe('GetWorkStepById', () => {
+      it('Get work steps by id testing', () => {
+        return pactum
+          .spec()
+          .get('/workSteps/{id}')
+          .withPathParams('id', 1)
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+    describe('GetWorkStepsByStatus', () => {
+      it('get workSteps by status testing', () => {
+        return pactum
+          .spec()
+          .get('/workSteps')
+          .withQueryParams('status', 'deneme2')
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+    describe('PutWorkStepsById', () => {
+      it('update worksteps by id testing', () => {
+        const updatedDto: WorkStepsDto = {
+          work_id: 4,
+          step_name: 'updatedDeneme2',
+          state: 'updatedDeneme2',
+          status: 'updatedDeneme2',
+        };
+        return pactum
+          .spec()
+          .put('/workSteps/{id}')
+          .withBody(updatedDto)
+          .withPathParams('id', 4)
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+    describe('DeleteWorkStepsById', () => {
+      it('delete worksteps by id testing', () => {
+        return pactum
+          .spec()
+          .delete('/workSteps/{id}')
+          .withPathParams('id', 5)
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+  });
+  describe('WorkProducts', () => {
+    describe('PostWorkProducts', () => {
+      it('create workProducts testing', () => {
+        const dto: WorkProductDto = {
+          work_id: 1,
+          product_id: 1,
+          status: 'deneme',
+        };
+        return pactum
+          .spec()
+          .post('/workProducts')
+          .withBody(dto)
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+    describe('GetWorkProductsById', () => {
+      it('get work products by id', () => {
+        return pactum
+          .spec()
+          .get('/workSteps/{work_id}')
+          .withPathParams('work_id', 1)
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+  });
+  describe('location', () => {
+    describe('PostLocation', () => {
+      it('create location testing', () => {
+        const dto: LocationDto = {
+          name: 'testingLocation',
+          atitude: 1,
+          longitude: 1,
+          timestamp: '10.10.23',
+        };
+        return pactum
+          .spec()
+          .post('/api/locations')
+          .withBody(dto)
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+    describe('GetAllLocations', () => {
+      it('get all locations testing', () => {
+        return pactum
+          .spec()
+          .get('/api/locations')
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+    describe('getLatestLocation', () => {
+      it('get latest location testing', () => {
+        return pactum
+          .spec()
+          .get('/api/locations/latest')
           .withHeaders({ Authorization: 'Bearer $S{userAt}' })
           .inspect();
       });
