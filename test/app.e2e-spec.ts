@@ -9,6 +9,7 @@ import { QaulityControlDto } from 'src/modules/quality-control/dto/quality-contr
 import FormData from 'form-data';
 import { AuthDto } from 'src/modules/auth/dto/auth.dto';
 import { UserDto } from 'src/modules/users/dto/user.dto';
+import { CustomerDto } from 'src/modules/customer/dto/customer.dto';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -292,6 +293,45 @@ describe('AppController (e2e)', () => {
           .get('/api/users/{id}')
           .withPathParams('id', 1)
           .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+  });
+  describe('Customers', () => {
+    describe('createCustomer', () => {
+      it('post create customer testing', () => {
+        const dto: CustomerDto = {
+          name: 'testCustomer',
+          odooid: 1,
+        };
+        return pactum
+          .spec()
+          .post('/api/customers')
+          .withBody(dto)
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .inspect();
+      });
+    });
+    describe('getCustomers', () => {
+      it('get customers testing', () => {
+        return pactum
+          .spec()
+          .get('/api/customers')
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+    describe('getCustomer by name', () => {
+      it('get customer by name with queryParams', () => {
+        return pactum
+          .spec()
+          .get('/api/customers/search')
+          .withQueryParams('name', 'testCustomer')
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
           .inspect();
       });
     });

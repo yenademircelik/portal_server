@@ -22,9 +22,7 @@ export class CustomerService {
   async getCustomersByName(name: string): Promise<Customer[]> {
     return await this.customerRepository.findAll({
       where: {
-        name: {
-          [Op.like]: `%${name}%`,
-        },
+        name,
       },
     });
   }
