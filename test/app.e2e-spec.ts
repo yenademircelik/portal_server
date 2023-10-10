@@ -252,4 +252,48 @@ describe('AppController (e2e)', () => {
       });
     });
   });
+  describe('users', () => {
+    describe('createUser', () => {
+      it('create user testing', () => {
+        const dto: UserDto = {
+          name: 'burak2',
+          phone: '456456',
+          email: 'bba2@gmail.com',
+          password: '1',
+          company: 'yena',
+          related_company: 'deneme2',
+          role: 'EXTERNAL',
+        };
+        return pactum
+          .spec()
+          .post('/api/create_user')
+          .withBody(dto)
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .inspect();
+      });
+    });
+    describe('allUsers', () => {
+      it('get all users testing', () => {
+        return pactum
+          .spec()
+          .get('/api/allusers')
+          .withHeaders({
+            Authorization: 'Bearer $S{userAt}',
+          })
+          .inspect();
+      });
+    });
+    describe('find user by id', () => {
+      it('get users by id', () => {
+        return pactum
+          .spec()
+          .get('/api/users/{id}')
+          .withPathParams('id', 1)
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+  });
 });
