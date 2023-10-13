@@ -13,6 +13,7 @@ import { WorkDto } from 'src/modules/works/dto/work.dto';
 import { WorkStepsDto } from 'src/modules/work-steps/dto/work-steps.dto';
 import { WorkProductDto } from 'src/modules/work-products/dto/work-products.dto';
 import { LocationDto } from 'src/modules/location/dto/location.dto';
+import { InspectionPlanDto } from 'src/modules/inspectionplan/dto/inspectionplan.dto';
 
 describe('AppController (e2e)', () => {
   let app: INestApplication;
@@ -585,6 +586,110 @@ describe('AppController (e2e)', () => {
         return pactum
           .spec()
           .get('/api/locations/latest')
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+  });
+  describe('InspectionPlan', () => {
+    describe('getAllInspections', () => {
+      it('get all inspectionPlans testing', () => {
+        return pactum
+          .spec()
+          .get('/inspectionplans')
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+    describe('CreateInspectionPlans', () => {
+      it('create inspectionplans testing', () => {
+        const dto: InspectionPlanDto = {
+          vendor_odooid: 1,
+          vendor_name: 'testVendor',
+          customer_odooid: 1,
+          customer_name: 'testCustomer',
+          product_odooid: 2552,
+          product_name: 'testProduct',
+          order_id: 1,
+          order_number: '1',
+          quantity: 1,
+          control_responsible: 'testingControlR',
+          control_date: new Date(),
+          delivery_date: new Date(),
+          status: 'Draft',
+          state: 'true',
+          control_type: 'testingControlType',
+          project_number: '2',
+          note: 'testingNote',
+          control_method: 'testingMethod',
+        };
+        return pactum
+          .spec()
+          .post('/inspectionplans')
+          .withBody(dto)
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+    describe('getOpen and draft iPlans', () => {
+      it('status open and draft iPlans get testing', () => {
+        return pactum
+          .spec()
+          .get('/inspectionplans/opendraft')
+          .withQueryParams('state', 'Open')
+          .withQueryParams('status', 'Draft')
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+    describe('getOpen and waiting iPlans', () => {
+      it('status open and waiting iPlans testing', () => {
+        return pactum
+          .spec()
+          .get('/inspectionplans/opendraft')
+          .withQueryParams('state', 'Open')
+          .withQueryParams('status', 'Waiting')
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+    describe('updateInspectionplans', () => {
+      it('update inspectionplans testing', () => {
+        const updatedDto: InspectionPlanDto = {
+          vendor_odooid: 3,
+          vendor_name: 'testVendor',
+          customer_odooid: 1,
+          customer_name: 'testCustomer',
+          product_odooid: 2552,
+          product_name: 'testProduct',
+          order_id: 1,
+          order_number: '1',
+          quantity: 1,
+          control_responsible: 'testingControlR',
+          control_date: new Date(),
+          delivery_date: new Date(),
+          status: 'Waiting',
+          state: 'Open',
+          control_type: 'testingControlType',
+          project_number: '2',
+          note: 'testingNote',
+          control_method: 'testingMethod',
+        };
+        return pactum
+          .spec()
+          .put('/inspectionplans/{vendor_odooid}')
+          .withBody(updatedDto)
+          .withPathParams('vendor_odooid', 3)
+          .withHeaders({ Authorization: 'Bearer $S{userAt}' })
+          .inspect();
+      });
+    });
+    describe('deleting inspectionplan', () => {
+      it('delete inspectionplan testing', () => {
+        return pactum
+          .spec()
+          .delete('/inspectionplans/{vendor_odooid}')
+          .withPathParams('vendor_odooid', 1)
           .withHeaders({ Authorization: 'Bearer $S{userAt}' })
           .inspect();
       });
